@@ -1,6 +1,6 @@
 package com.turkcell.ecommerce_cqrs.core.security;
 
-import com.turkcell.turkcellcqrs.core.jwt.JwtService;
+import com.turkcell.ecommerce_cqrs.core.jwt.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
