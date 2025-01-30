@@ -1,7 +1,8 @@
-package com.turkcell.ecommerce_cqrs.application.user.create;
+package com.turkcell.ecommerce_cqrs.application.user.command.create;
 
 import an.awesome.pipelinr.Command;
-import com.turkcell.ecommerce_cqrs.entity.User;
+import com.turkcell.ecommerce_cqrs.application.user.mapper.UserMapper;
+import com.turkcell.ecommerce_cqrs.domain.entity.User;
 import com.turkcell.ecommerce_cqrs.persistance.user.UserRepository;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -41,25 +42,13 @@ public class CreateUserCommand implements Command<CreatedUserResponse> {
             implements Handler<CreateUserCommand, CreatedUserResponse> {
         private final UserRepository userRepository;
 
-
-
-
-
-
         @Override
         public CreatedUserResponse handle(CreateUserCommand createUserCommand) {
-            User user = new User();
-
-
-
-
-            user.setName(createUserCommand.getName());
-            user.setSurname(createUserCommand.getSurname());
-            user.setEmail(createUserCommand.getEmail());
-            user.setPassword(createUserCommand.getPassword());
+            UserMapper userMapper = UserMapper.INSTANCE;
+            User user = userMapper.toEntity(createUserCommand);
             userRepository.save(user);
 
-            return new CreatedUserResponse( user.getName(), user.getSurname(), user.getEmail() ,user.getPassword());
+            return userMapper.toCreatedUserResponse(user);
         }
     }
 

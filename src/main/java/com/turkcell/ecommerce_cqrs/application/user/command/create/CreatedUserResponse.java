@@ -1,4 +1,4 @@
-package com.turkcell.ecommerce_cqrs.application.user.update;
+package com.turkcell.ecommerce_cqrs.application.user.command.create;
 
 
 import lombok.AllArgsConstructor;
@@ -12,12 +12,12 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpdatedUserResponse {
+public class CreatedUserResponse {
 
-    private UUID id;
     private String name;
     private String surname;
     private String email;
+
     private String password;
 
 }
