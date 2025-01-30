@@ -1,8 +1,8 @@
 package com.turkcell.ecommerce_cqrs.application.category.command.delete;
 
 import an.awesome.pipelinr.Command;
-import com.turkcell.turkcellcqrs3.domain.entity.Category;
-import com.turkcell.turkcellcqrs3.persistance.category.CategoryRepository;
+import com.turkcell.ecommerce_cqrs.entity.Category;
+import com.turkcell.ecommerce_cqrs.persistance.category.CategoryRepository;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
