@@ -2,6 +2,7 @@ package com.turkcell.ecommerce_cqrs.application.user.command.update;
 
 import an.awesome.pipelinr.Command;
 import com.turkcell.ecommerce_cqrs.application.user.mapper.UserMapper;
+import com.turkcell.ecommerce_cqrs.core.pipelines.auth.AuthenticatedRequest;
 import com.turkcell.ecommerce_cqrs.domain.entity.User;
 import com.turkcell.ecommerce_cqrs.persistance.user.UserRepository;
 import lombok.*;
@@ -13,7 +14,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class UpdateUserCommand implements Command<UpdatedUserResponse> {
+public class UpdateUserCommand implements Command<UpdatedUserResponse>, AuthenticatedRequest {
 
     private UUID id;
     private String name;
