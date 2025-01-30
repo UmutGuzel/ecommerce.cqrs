@@ -2,7 +2,7 @@ package com.turkcell.ecommerce_cqrs.application.user.command.update;
 
 import an.awesome.pipelinr.Command;
 import com.turkcell.ecommerce_cqrs.application.user.mapper.UserMapper;
-import com.turkcell.ecommerce_cqrs.entity.User;
+import com.turkcell.ecommerce_cqrs.domain.entity.User;
 import com.turkcell.ecommerce_cqrs.persistance.user.UserRepository;
 import lombok.*;
 import org.springframework.stereotype.Component;

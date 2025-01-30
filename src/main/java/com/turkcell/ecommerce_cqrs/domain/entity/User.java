@@ -1,4 +1,4 @@
-package com.turkcell.ecommerce_cqrs.entity;
+package com.turkcell.ecommerce_cqrs.domain.entity;
 
 
 import jakarta.persistence.*;

@@ -1,5 +1,6 @@
-package com.turkcell.ecommerce_cqrs.entity;
+package com.turkcell.ecommerce_cqrs.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,20 +17,23 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "order_statuses")
-public class OrderStatus {
+@Table(name = "permissions")
+public class Permission {
     @Id
     @UuidGenerator
     private UUID id;
 
+    private String name;
 
-    private String status;
+
+    private String description;
 
     @Column(name="created_at")
     private Date createdAt;
     @Column(name="updated_at")
     private Date updatedAt;
 
-    @OneToMany(mappedBy = "orderStatus", cascade = CascadeType.ALL)
-    private List<Order> orders;
+    @ManyToMany(mappedBy = "permissions")
+    @JsonIgnore
+    private List<Role> roles;
 }
