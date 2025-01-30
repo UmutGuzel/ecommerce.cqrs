@@ -1,6 +1,6 @@
 package com.turkcell.ecommerce_cqrs.persistance.cart;
 
-import com.turkcell.turkcellcqrs3.domain.entity.Cart;
+import com.turkcell.ecommerce_cqrs.entity.Cart;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

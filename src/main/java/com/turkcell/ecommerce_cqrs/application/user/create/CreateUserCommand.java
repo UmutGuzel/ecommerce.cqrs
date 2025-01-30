@@ -1,11 +1,8 @@
 package com.turkcell.ecommerce_cqrs.application.user.create;
 
 import an.awesome.pipelinr.Command;
-import com.turkcell.turkcellcqrs3.application.category.command.create.CreateCategoryCommand;
-import com.turkcell.turkcellcqrs3.application.category.command.create.CreatedCategoryResponse;
-
-import com.turkcell.turkcellcqrs3.domain.entity.User;
-import com.turkcell.turkcellcqrs3.persistance.user.UserRepository;
+import com.turkcell.ecommerce_cqrs.entity.User;
+import com.turkcell.ecommerce_cqrs.persistance.user.UserRepository;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;

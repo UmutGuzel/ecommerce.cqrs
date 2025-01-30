@@ -1,9 +1,8 @@
 package com.turkcell.ecommerce_cqrs.application.user.update;
 
 import an.awesome.pipelinr.Command;
-import com.turkcell.turkcellcqrs3.application.category.command.update.UpdatedCategoryCommand;
-import com.turkcell.turkcellcqrs3.domain.entity.User;
-import com.turkcell.turkcellcqrs3.persistance.user.UserRepository;
+import com.turkcell.ecommerce_cqrs.entity.User;
+import com.turkcell.ecommerce_cqrs.persistance.user.UserRepository;
 import lombok.*;
 import org.springframework.stereotype.Component;
 

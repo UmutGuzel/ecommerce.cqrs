@@ -1,13 +1,13 @@
 package com.turkcell.ecommerce_cqrs.controller;
 
 import an.awesome.pipelinr.Pipeline;
-import com.turkcell.turkcellcqrs3.application.category.command.create.CreateCategoryCommand;
-import com.turkcell.turkcellcqrs3.application.category.command.create.CreatedCategoryResponse;
-import com.turkcell.turkcellcqrs3.application.category.command.delete.DeleteCategoryCommand;
-import com.turkcell.turkcellcqrs3.application.category.command.delete.DeletedCategoryResponse;
-import com.turkcell.turkcellcqrs3.application.category.command.update.UpdatedCategoryCommand;
-import com.turkcell.turkcellcqrs3.application.category.command.update.UpdatedCategoryResponse;
-import com.turkcell.turkcellcqrs3.core.web.BaseController;
+import com.turkcell.ecommerce_cqrs.application.category.command.create.CreateCategoryCommand;
+import com.turkcell.ecommerce_cqrs.application.category.command.create.CreatedCategoryResponse;
+import com.turkcell.ecommerce_cqrs.application.category.command.delete.DeleteCategoryCommand;
+import com.turkcell.ecommerce_cqrs.application.category.command.delete.DeletedCategoryResponse;
+import com.turkcell.ecommerce_cqrs.application.category.command.update.UpdatedCategoryCommand;
+import com.turkcell.ecommerce_cqrs.application.category.command.update.UpdatedCategoryResponse;
+import com.turkcell.ecommerce_cqrs.core.web.BaseController;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

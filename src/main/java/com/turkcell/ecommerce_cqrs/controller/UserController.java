@@ -1,13 +1,13 @@
 package com.turkcell.ecommerce_cqrs.controller;
 
 import an.awesome.pipelinr.Pipeline;
-import com.turkcell.turkcellcqrs3.application.user.create.CreateUserCommand;
-import com.turkcell.turkcellcqrs3.application.user.create.CreatedUserResponse;
-import com.turkcell.turkcellcqrs3.application.user.delete.DeleteUserCommand;
-import com.turkcell.turkcellcqrs3.application.user.delete.DeletedUserResponse;
-import com.turkcell.turkcellcqrs3.application.user.update.UpdateUserCommand;
-import com.turkcell.turkcellcqrs3.application.user.update.UpdatedUserResponse;
-import com.turkcell.turkcellcqrs3.core.web.BaseController;
+import com.turkcell.ecommerce_cqrs.application.user.create.CreateUserCommand;
+import com.turkcell.ecommerce_cqrs.application.user.create.CreatedUserResponse;
+import com.turkcell.ecommerce_cqrs.application.user.delete.DeleteUserCommand;
+import com.turkcell.ecommerce_cqrs.application.user.delete.DeletedUserResponse;
+import com.turkcell.ecommerce_cqrs.application.user.update.UpdateUserCommand;
+import com.turkcell.ecommerce_cqrs.application.user.update.UpdatedUserResponse;
+import com.turkcell.ecommerce_cqrs.core.web.BaseController;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

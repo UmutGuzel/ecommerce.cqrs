@@ -1,8 +1,8 @@
 package com.turkcell.ecommerce_cqrs.application.category.command.create;
 
 import an.awesome.pipelinr.Command;
-import com.turkcell.turkcellcqrs3.domain.entity.Category;
-import com.turkcell.turkcellcqrs3.persistance.category.CategoryRepository;
+import com.turkcell.ecommerce_cqrs.entity.Category;
+import com.turkcell.ecommerce_cqrs.persistance.category.CategoryRepository;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
