@@ -1,6 +1,7 @@
-package com.turkcell.ecommerce_cqrs.application.user.update;
+package com.turkcell.ecommerce_cqrs.application.user.command.update;
 
 import an.awesome.pipelinr.Command;
+import com.turkcell.ecommerce_cqrs.application.user.mapper.UserMapper;
 import com.turkcell.ecommerce_cqrs.entity.User;
 import com.turkcell.ecommerce_cqrs.persistance.user.UserRepository;
 import lombok.*;
@@ -28,14 +29,15 @@ public class UpdateUserCommand implements Command<UpdatedUserResponse> {
 
         @Override
         public UpdatedUserResponse handle(UpdateUserCommand updateUserCommand) {
+            UserMapper userMapper = UserMapper.INSTANCE;
+
             User user=userRepository
                     .findById(updateUserCommand.getId()).orElseThrow(()->new RuntimeException("User not found"));
-            user.setName(updateUserCommand.getName());
-            user.setSurname(updateUserCommand.getSurname());
-            user.setEmail(updateUserCommand.getEmail());
-            user.setPassword(updateUserCommand.getPassword());
+
+            userMapper.updateEntity(user,updateUserCommand);
+
             userRepository.save(user);
-            return new UpdatedUserResponse(user.getId(),user.getName(),user.getSurname(),user.getEmail(),user.getPassword());
+            return userMapper.toUpdatedUserResponse(user);
         }
     }
 

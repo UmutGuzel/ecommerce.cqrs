@@ -1,4 +1,5 @@
-package com.turkcell.ecommerce_cqrs.application.user.delete;
+package com.turkcell.ecommerce_cqrs.application.user.command.update;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,9 +12,12 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class DeletedUserResponse {
+public class UpdatedUserResponse {
+
     private UUID id;
     private String name;
-
+    private String surname;
+    private String email;
+    private String password;
 
 }

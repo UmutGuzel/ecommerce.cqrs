@@ -1,4 +1,4 @@
-package com.turkcell.ecommerce_cqrs.application.user.delete;
+package com.turkcell.ecommerce_cqrs.application.user.command.delete;
 
 import an.awesome.pipelinr.Command;
 import com.turkcell.ecommerce_cqrs.entity.User;
@@ -27,7 +27,7 @@ public class DeleteUserCommand implements Command<DeletedUserResponse> {
             User user = userRepository.findById(deleteUserCommand.getId()).orElseThrow(()->new RuntimeException("User not found"));
             userRepository.delete(user);
 
-            return new DeletedUserResponse(user.getId(), "Category deleted successfully.");
+            return new DeletedUserResponse(true);
         }
     }
 
