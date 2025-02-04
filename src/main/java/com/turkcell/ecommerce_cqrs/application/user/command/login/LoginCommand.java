@@ -9,6 +9,8 @@ import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.Map;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -33,8 +35,9 @@ public class LoginCommand implements Command<LoginCommandResponse> {
             if(!passwordEncoder.matches(loginCommand.getPassword(), user.getPassword())){
                 throw new RuntimeException("Password is incorrect");
             }
+            Map<String, Object> roles = Map.of("roles", user.getRoles().stream().map(role -> role.getName()).toList());
 
-            return new LoginCommandResponse(jwtService.generateToken(loginCommand.getEmail()));
+            return new LoginCommandResponse(jwtService.generateToken(loginCommand.getEmail(), roles));
         }
     }
 }

@@ -8,12 +8,14 @@ import com.turkcell.ecommerce_cqrs.persistance.user.UserRepository;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateUserRoleCommand implements Command<UpdateUserRoleResponse> {
     private String email;
-    private String roles;
+    private List<String> roles;
 
 
     @Component

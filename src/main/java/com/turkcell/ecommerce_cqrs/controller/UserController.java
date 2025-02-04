@@ -1,10 +1,14 @@
 package com.turkcell.ecommerce_cqrs.controller;
 
 import an.awesome.pipelinr.Pipeline;
+import com.turkcell.ecommerce_cqrs.application.user.command.change_password.ChangePasswordCommand;
+import com.turkcell.ecommerce_cqrs.application.user.command.change_password.ChangePasswordResponse;
 import com.turkcell.ecommerce_cqrs.application.user.command.create.CreateUserCommand;
 import com.turkcell.ecommerce_cqrs.application.user.command.create.CreatedUserResponse;
 import com.turkcell.ecommerce_cqrs.application.user.command.delete.DeleteUserCommand;
 import com.turkcell.ecommerce_cqrs.application.user.command.delete.DeletedUserResponse;
+import com.turkcell.ecommerce_cqrs.application.user.command.login.LoginCommand;
+import com.turkcell.ecommerce_cqrs.application.user.command.login.LoginCommandResponse;
 import com.turkcell.ecommerce_cqrs.application.user.command.update.UpdateUserCommand;
 import com.turkcell.ecommerce_cqrs.application.user.command.update.UpdatedUserResponse;
 import com.turkcell.ecommerce_cqrs.application.user.command.update_user_role.UpdateUserRoleCommand;
@@ -24,7 +28,7 @@ public class UserController extends BaseController {
         super(pipeline);
     }
 
-    @PostMapping
+    @PostMapping("/register")
     @ResponseStatus(code = HttpStatus.CREATED)
     public CreatedUserResponse create(@RequestBody CreateUserCommand createUserCommand) {
         return createUserCommand.execute(pipeline);
@@ -37,8 +41,8 @@ public class UserController extends BaseController {
 
     @PutMapping("/change-password")
     @ResponseStatus(code=HttpStatus.OK)
-    public UpdatedUserResponse changePassword(@RequestBody UpdateUserCommand updateUserCommand) {
-        return updateUserCommand.execute(pipeline);
+    public ChangePasswordResponse changePassword(@RequestBody ChangePasswordCommand changePasswordCommand) {
+        return changePasswordCommand.execute(pipeline);
     }
 
     @PutMapping("/change-role")
@@ -54,8 +58,8 @@ public class UserController extends BaseController {
 
     @PostMapping("/login")
     @ResponseStatus(code = HttpStatus.OK)
-    public CreatedUserResponse login(@RequestBody CreateUserCommand createUserCommand) {
-        return createUserCommand.execute(pipeline);
+    public LoginCommandResponse login(@RequestBody LoginCommand loginCommand) {
+        return loginCommand.execute(pipeline);
     }
 
     @DeleteMapping

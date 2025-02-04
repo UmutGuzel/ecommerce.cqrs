@@ -1,6 +1,8 @@
 package com.turkcell.ecommerce_cqrs.application.user.command.change_password;
 
 import an.awesome.pipelinr.Command;
+import com.turkcell.ecommerce_cqrs.core.pipelines.auth.AuthenticatedRequest;
+import com.turkcell.ecommerce_cqrs.core.pipelines.auth.AuthorizedRequest;
 import com.turkcell.ecommerce_cqrs.domain.entity.User;
 import com.turkcell.ecommerce_cqrs.persistance.user.UserRepository;
 import jakarta.validation.constraints.Email;
@@ -11,16 +13,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChangePasswordCommand implements Command<ChangePasswordResponse> {
-    @Email(message = "Eposta uygun formatta değil", regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")
-    @NotBlank(message = "Eposta alanı boş bırakılamaz.")
-    private String email;
+public class ChangePasswordCommand implements Command<ChangePasswordResponse>, AuthenticatedRequest {
     @Length(min=8, message = "Eski şifre en az 8 karakter olmalıdır.")
     @NotBlank(message = "Eski şifre alanı boş bırakılamaz.")
     private String oldPassword;
@@ -32,13 +33,15 @@ public class ChangePasswordCommand implements Command<ChangePasswordResponse> {
     @Component
     @RequiredArgsConstructor
     public static class ChangePasswordCommandHandler implements Handler<ChangePasswordCommand, ChangePasswordResponse>{
-        UserRepository userRepository;
-        PasswordEncoder passwordEncoder;
+        private final UserRepository userRepository;
+        private final PasswordEncoder passwordEncoder;
         @Override
         public ChangePasswordResponse handle(ChangePasswordCommand changePasswordCommand) {
-            User user = userRepository.findByEmail(changePasswordCommand.getEmail()).orElseThrow(()->new RuntimeException("Kullanıcı bulunamadı"));
+            SecurityContext context = SecurityContextHolder.getContext();
+            String email = context.getAuthentication().getName();
+            User user = userRepository.findByEmail(email).orElseThrow(()->new IllegalArgumentException("Kullanıcı bulunamadı"));
             if(!passwordEncoder.matches(changePasswordCommand.getNewPassword(), user.getPassword()))
-                throw new RuntimeException("Şifre hatalı");
+                throw new IllegalArgumentException("Şifre hatalı");
             user.setPassword(passwordEncoder.encode(changePasswordCommand.getNewPassword()));
             userRepository.save(user);
 
