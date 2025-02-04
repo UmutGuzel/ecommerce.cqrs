@@ -25,12 +25,11 @@ public class UpdateUserCommand implements Command<UpdatedUserResponse>, Authenti
     @Component
     @RequiredArgsConstructor
     public static class UpdateUserCommandHandler implements Handler<UpdateUserCommand,UpdatedUserResponse>{
-
+        private final UserMapper userMapper;
         private final UserRepository userRepository;
 
         @Override
         public UpdatedUserResponse handle(UpdateUserCommand updateUserCommand) {
-            UserMapper userMapper = UserMapper.INSTANCE;
 
             User user=userRepository
                     .findById(updateUserCommand.getId()).orElseThrow(()->new RuntimeException("User not found"));

@@ -16,10 +16,10 @@ public class GetListUserQuery implements Command<List<GetListUserDto>>, Authenti
     @RequiredArgsConstructor
     public static class GetListBookQueryHandler implements Command.Handler<GetListUserQuery, List<GetListUserDto>>{
         private final UserRepository userRepository;
+        private final UserMapper userMapper;
 
         @Override
         public List<GetListUserDto> handle(GetListUserQuery getListUserQuery) {
-            UserMapper userMapper = UserMapper.INSTANCE;
             List<User> users = userRepository.findAll();
             return userMapper.toListUserDto(users);
         }
