@@ -36,10 +36,10 @@ public class JwtFilter extends OncePerRequestFilter
             String username = jwtService.extractUsername(jwt);
             List<String> roles = jwtService.extractRoles(jwt);
 
-            List<GrantedAuthority> authorities = roles
-                    .stream()
-                    .map(role -> (GrantedAuthority) () -> role)
-                    .toList();
+                List<GrantedAuthority> authorities = roles
+                        .stream()
+                        .map(role -> (GrantedAuthority) () -> role)
+                        .toList();
 
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                     username,

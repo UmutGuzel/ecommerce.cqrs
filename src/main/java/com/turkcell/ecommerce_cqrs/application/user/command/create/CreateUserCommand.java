@@ -4,12 +4,14 @@ import an.awesome.pipelinr.Command;
 import com.turkcell.ecommerce_cqrs.application.user.mapper.UserMapper;
 import com.turkcell.ecommerce_cqrs.domain.entity.User;
 import com.turkcell.ecommerce_cqrs.persistance.user.UserRepository;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 
@@ -41,11 +43,13 @@ public class CreateUserCommand implements Command<CreatedUserResponse> {
     public static class CreateUserCommandHandler
             implements Handler<CreateUserCommand, CreatedUserResponse> {
         private final UserRepository userRepository;
+        private final PasswordEncoder passwordEncoder;
+        private final UserMapper userMapper;
 
         @Override
-        public CreatedUserResponse handle(CreateUserCommand createUserCommand) {
-            UserMapper userMapper = UserMapper.INSTANCE;
+        public CreatedUserResponse handle(@Valid CreateUserCommand createUserCommand) {
             User user = userMapper.toEntity(createUserCommand);
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepository.save(user);
 
             return userMapper.toCreatedUserResponse(user);

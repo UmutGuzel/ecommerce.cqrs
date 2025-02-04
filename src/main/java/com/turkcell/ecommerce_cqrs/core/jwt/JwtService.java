@@ -21,11 +21,11 @@ public class JwtService
     @Value("${jwt.secret}")
     private String SECRET_KEY;
 
-    public String generateToken(String username) {
+    public String generateToken(String email) {
         return Jwts
                 .builder()
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .subject(username)
+                .subject(email)
                 .expiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(getSignKey())
                 .compact();
