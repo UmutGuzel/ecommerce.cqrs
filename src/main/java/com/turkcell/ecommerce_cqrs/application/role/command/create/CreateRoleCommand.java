@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Data
@@ -17,10 +18,12 @@ public class CreateRoleCommand implements Command<CreateRoleResponse> {
     private String name;
 
     @Component
+    @RequiredArgsConstructor
     static class CreateRoleCommandHandler implements Command.Handler<CreateRoleCommand, CreateRoleResponse> {
+        private final RoleMapper roleMapper;
         @Override
         public CreateRoleResponse handle(CreateRoleCommand createRoleCommand) {
-            Role role = RoleMapper.INSTANCE.toEntity(createRoleCommand);
+            Role role = roleMapper.toEntity(createRoleCommand);
 
             return new CreateRoleResponse(createRoleCommand.getName());
         }
