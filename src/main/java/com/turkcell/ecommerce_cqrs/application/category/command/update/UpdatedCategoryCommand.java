@@ -1,20 +1,29 @@
 package com.turkcell.ecommerce_cqrs.application.category.command.update;
 
 import an.awesome.pipelinr.Command;
+
+import com.turkcell.ecommerce_cqrs.core.pipelines.auth.AuthorizedRequest;
 import com.turkcell.ecommerce_cqrs.domain.entity.Category;
 import com.turkcell.ecommerce_cqrs.persistance.category.CategoryRepository;
+
 import lombok.*;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.UUID;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpdatedCategoryCommand implements Command<UpdatedCategoryResponse> {
+public class UpdatedCategoryCommand implements Command<UpdatedCategoryResponse> , AuthorizedRequest {
     private UUID id;
     private String name;
+
+    @Override
+    public List<String> getRequiredRoles() {
+        return List.of("Admin","Category.Update ");
+    }
 
 
     @Component

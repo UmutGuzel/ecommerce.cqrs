@@ -1,6 +1,8 @@
 package com.turkcell.ecommerce_cqrs.application.category.command.create;
 
 import an.awesome.pipelinr.Command;
+
+import com.turkcell.ecommerce_cqrs.application.category.mapper.CategoryMapper;
 import com.turkcell.ecommerce_cqrs.domain.entity.Category;
 import com.turkcell.ecommerce_cqrs.persistance.category.CategoryRepository;
 import jakarta.validation.constraints.NotBlank;
@@ -27,11 +29,22 @@ public class CreateCategoryCommand implements Command<CreatedCategoryResponse> {
         private final CategoryRepository categoryRepository;
         @Override
         public CreatedCategoryResponse handle(CreateCategoryCommand createCategoryCommand) {
-            Category category = new Category();
-            category.setName(createCategoryCommand.getName());
+
+            //ManuelMapping
+            //Category category = new Category();
+            //category.setName(createCategoryCommand.getName());
+            //categoryRepository.save(category);
+
+            //Auto Mapping(MapStruct)
+            //MAPPER'I BAĞIMLILIK GİBİ DEĞİL İNSTANCE OLARAK ALICAZ
+            CategoryMapper mapper=CategoryMapper.INSTANCE;
+            Category category=mapper.convertCreateCategoryCommandToCategory(createCategoryCommand);
             categoryRepository.save(category);
 
-            return new CreatedCategoryResponse(category.getId(),category.getName());
+
+
+
+            return mapper.convertCategoryToCreatedCategoryResponse(category);
         }
     }
 
