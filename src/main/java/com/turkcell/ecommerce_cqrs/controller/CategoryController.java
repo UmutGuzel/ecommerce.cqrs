@@ -2,6 +2,8 @@ package com.turkcell.ecommerce_cqrs.controller;
 
 import an.awesome.pipelinr.Pipeline;
 import com.turkcell.ecommerce_cqrs.application.category.command.create.CreateCategoryCommand;
+import com.turkcell.ecommerce_cqrs.application.category.command.create.CreateSubCategoryCommand;
+import com.turkcell.ecommerce_cqrs.application.category.command.create.CreateSubCategoryResponse;
 import com.turkcell.ecommerce_cqrs.application.category.command.create.CreatedCategoryResponse;
 import com.turkcell.ecommerce_cqrs.application.category.command.delete.DeleteCategoryCommand;
 import com.turkcell.ecommerce_cqrs.application.category.command.delete.DeletedCategoryResponse;
@@ -35,6 +37,13 @@ public class CategoryController extends BaseController {
     @ResponseStatus(code = HttpStatus.OK)
     public DeletedCategoryResponse delete(@RequestBody DeleteCategoryCommand deleteCategoryCommand) {
         return  deleteCategoryCommand.execute(pipeline);
+    }
+    @PostMapping("/{parentId}/subcategories")
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public CreateSubCategoryResponse addSubcategory(@RequestBody CreateSubCategoryCommand createSubCategoryCommand) {
+        return createSubCategoryCommand.execute(pipeline);
+
+
     }
 
 
